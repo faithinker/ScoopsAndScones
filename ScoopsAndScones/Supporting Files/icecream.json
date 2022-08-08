@@ -1,0 +1,21 @@
+{
+  "cones": [
+    "Sugar Cone",
+    "Cake Cone",
+    "Waffle Cone",
+    "Cup"
+  ],
+  "flavors": [
+    "Chocolate",
+    "Strawberry",
+    "Vanilla",
+    "Pistachio",
+    "Hazelnut"
+  ],
+  "toppings": [
+    "Hot Fudge",
+    "Sprinkles",
+    "Mystery Sauce",
+    "Chocolate Chips"
+  ]
+}
