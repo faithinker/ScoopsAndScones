@@ -8,15 +8,19 @@
 
 import UIKit
 
+// MARK: #0 Make Model
+
 enum CreateIceCream {
-    // MARK: Use cases
-    
-    enum Something {
+    enum LoadIceCream {
         struct Request {
         }
         struct Response {
+            var iceCreamData: IceCream
         }
         struct ViewModel {
+            var cones: [String]
+            var flavors: [String]
+            var toppings: [String]
         }
     }
 }

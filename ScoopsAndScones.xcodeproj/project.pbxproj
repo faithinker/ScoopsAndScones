@@ -28,6 +28,11 @@
 		05FCC87228A197F1002DA706 /* CreateIceCreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FCC86C28A197F1002DA706 /* CreateIceCreamViewController.swift */; };
 		05FCC87328A197F1002DA706 /* CreateIceCreamInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FCC86D28A197F1002DA706 /* CreateIceCreamInteractor.swift */; };
 		05FCC87528A199EE002DA706 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 05FCC87428A199EE002DA706 /* README.md */; };
+		05FCC87828A1A153002DA706 /* IceCreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FCC87728A1A153002DA706 /* IceCreamCell.swift */; };
+		05FCC87D28A1DC64002DA706 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 05FCC87C28A1DC64002DA706 /* RxCocoa */; };
+		05FCC87F28A1DC64002DA706 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 05FCC87E28A1DC64002DA706 /* RxRelay */; };
+		05FCC88128A1DC64002DA706 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 05FCC88028A1DC64002DA706 /* RxSwift */; };
+		05FCC88428A1DC7D002DA706 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 05FCC88328A1DC7D002DA706 /* NSObject-Rx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +76,7 @@
 		05FCC86C28A197F1002DA706 /* CreateIceCreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIceCreamViewController.swift; sourceTree = "<group>"; };
 		05FCC86D28A197F1002DA706 /* CreateIceCreamInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIceCreamInteractor.swift; sourceTree = "<group>"; };
 		05FCC87428A199EE002DA706 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		05FCC87728A1A153002DA706 /* IceCreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCreamCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +84,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05FCC87D28A1DC64002DA706 /* RxCocoa in Frameworks */,
 				05FCC85128A18B27002DA706 /* SnapKit in Frameworks */,
+				05FCC88128A1DC64002DA706 /* RxSwift in Frameworks */,
+				05FCC87F28A1DC64002DA706 /* RxRelay in Frameworks */,
+				05FCC88428A1DC7D002DA706 /* NSObject-Rx in Frameworks */,
 				05FCC85428A18B7B002DA706 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,6 +199,7 @@
 		05FCC85A28A18E0C002DA706 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				05FCC87628A1A140002DA706 /* Component */,
 				05FCC86528A1923B002DA706 /* CreateIceCream */,
 			);
 			path = Scenes;
@@ -233,6 +244,14 @@
 			path = CreateIceCream;
 			sourceTree = "<group>";
 		};
+		05FCC87628A1A140002DA706 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				05FCC87728A1A153002DA706 /* IceCreamCell.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -252,6 +271,10 @@
 			packageProductDependencies = (
 				05FCC85028A18B27002DA706 /* SnapKit */,
 				05FCC85328A18B7B002DA706 /* Then */,
+				05FCC87C28A1DC64002DA706 /* RxCocoa */,
+				05FCC87E28A1DC64002DA706 /* RxRelay */,
+				05FCC88028A1DC64002DA706 /* RxSwift */,
+				05FCC88328A1DC7D002DA706 /* NSObject-Rx */,
 			);
 			productName = ScoopsAndScones;
 			productReference = 05FCC81B28A18893002DA706 /* ScoopsAndScones.app */;
@@ -328,6 +351,8 @@
 			packageReferences = (
 				05FCC84F28A18B27002DA706 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				05FCC85228A18B7B002DA706 /* XCRemoteSwiftPackageReference "Then" */,
+				05FCC87B28A1DC64002DA706 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				05FCC88228A1DC7D002DA706 /* XCRemoteSwiftPackageReference "NSObject-Rx" */,
 			);
 			productRefGroup = 05FCC81C28A18893002DA706 /* Products */;
 			projectDirPath = "";
@@ -377,6 +402,7 @@
 				05FCC86328A190FB002DA706 /* IceCreamDataStore.swift in Sources */,
 				05FCC86F28A197F1002DA706 /* CreateIceCreamWorker.swift in Sources */,
 				05FCC86728A1979E002DA706 /* Bundle+.swift in Sources */,
+				05FCC87828A1A153002DA706 /* IceCreamCell.swift in Sources */,
 				05FCC87128A197F1002DA706 /* CreateIceCreamModels.swift in Sources */,
 				05FCC85928A18C31002DA706 /* UIView+.swift in Sources */,
 				05FCC87228A197F1002DA706 /* CreateIceCreamViewController.swift in Sources */,
@@ -734,6 +760,22 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		05FCC87B28A1DC64002DA706 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 6.5.0;
+			};
+		};
+		05FCC88228A1DC7D002DA706 /* XCRemoteSwiftPackageReference "NSObject-Rx" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/NSObject-Rx.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -746,6 +788,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 05FCC85228A18B7B002DA706 /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		05FCC87C28A1DC64002DA706 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 05FCC87B28A1DC64002DA706 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		05FCC87E28A1DC64002DA706 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 05FCC87B28A1DC64002DA706 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		05FCC88028A1DC64002DA706 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 05FCC87B28A1DC64002DA706 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		05FCC88328A1DC7D002DA706 /* NSObject-Rx */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 05FCC88228A1DC7D002DA706 /* XCRemoteSwiftPackageReference "NSObject-Rx" */;
+			productName = "NSObject-Rx";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

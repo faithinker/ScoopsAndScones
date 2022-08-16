@@ -1,6 +1,24 @@
 {
   "pins" : [
     {
+      "identity" : "nsobject-rx",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/RxSwiftCommunity/NSObject-Rx.git",
+      "state" : {
+        "revision" : "6134a640808db7390d3dfcb32ef5f0a12b7a644d",
+        "version" : "5.2.2"
+      }
+    },
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
+        "version" : "6.5.0"
+      }
+    },
+    {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SnapKit/SnapKit.git",

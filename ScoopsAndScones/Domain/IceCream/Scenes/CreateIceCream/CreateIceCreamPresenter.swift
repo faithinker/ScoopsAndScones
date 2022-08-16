@@ -9,17 +9,16 @@
 import UIKit
 
 protocol CreateIceCreamPresentationLogic {
-    func presentSomething(response: CreateIceCream.Something.Response)
+    func presentIceCream(response: CreateIceCream.LoadIceCream.Response)
 }
 
 class CreateIceCreamPresenter: CreateIceCreamPresentationLogic {
     
     weak var viewController: CreateIceCreamDisplayLogic?
     
-    // MARK: Do something
-    
-    func presentSomething(response: CreateIceCream.Something.Response) {
-        let viewModel = CreateIceCream.Something.ViewModel()
-        viewController?.displaySomething(viewModel: viewModel)
+    // MARK: #3 Formatted Data inject into the Viewmodel
+    func presentIceCream(response: CreateIceCream.LoadIceCream.Response) {
+        let viewModel = CreateIceCream.LoadIceCream.ViewModel(cones: response.iceCreamData.cones, flavors: response.iceCreamData.flavors, toppings: response.iceCreamData.toppings)
+        viewController?.displayIceCream(viewModel: viewModel)
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CreateIceCreamBusinessLogic {
-    func doSomething(request: CreateIceCream.Something.Request)
+    func loadIceCream(request: CreateIceCream.LoadIceCream.Request)
 }
 
 protocol CreateIceCreamDataStore {
@@ -22,13 +22,13 @@ class CreateIceCreamInteractor: CreateIceCreamBusinessLogic, CreateIceCreamDataS
     var worker: CreateIceCreamWorker?
     //var name: String = ""
     
-    // MARK: Do something
-    
-    func doSomething(request: CreateIceCream.Something.Request) {
+    // MARK: #2 Communicate NetworkWorker
+    func loadIceCream(request: CreateIceCream.LoadIceCream.Request) {
         worker = CreateIceCreamWorker()
         worker?.doSomeWork()
         
-        let response = CreateIceCream.Something.Response()
-        presenter?.presentSomething(response: response)
+        let iceCream = Bundle.main.decode(IceCream.self, from: "icecream.json")
+        let response = CreateIceCream.LoadIceCream.Response(iceCreamData: iceCream)
+        presenter?.presentIceCream(response: response)
     }
 }

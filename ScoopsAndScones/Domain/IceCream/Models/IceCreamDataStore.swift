@@ -8,6 +8,8 @@
 import Foundation
 
 class IceCreamDataStore {
+    var displayedMainMenu: [String] = []
+    
     var displayedCones: [String] = []
     var displayedFlavors: [String] = []
     var displayedToppings: [String] = []
@@ -16,10 +18,11 @@ class IceCreamDataStore {
 extension IceCreamDataStore {
   static var sample: IceCreamDataStore {
     let model = IceCreamDataStore()
-    model.displayedCones = ["Sugar Cone", "Cake Cone"]
-    model.displayedFlavors = ["Chocolate", "Strawberry"]
-    model.displayedToppings = ["Hot Fudge", "Caramel"]
-
+    model.displayedMainMenu = ["Select a cone or cup", "Choose your flavor", "Choose a topping"]
+    model.displayedCones = ["Sugar Cone", "Cake Cone", "Waffle Cone", "Cup"]
+    model.displayedFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Hazelnut"]
+    model.displayedToppings = ["Hot Fudge", "Sprinkles", "Mystery Sauce", "Chocolate Chips"]
+      
     return model
   }
 }
