@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import RxRelay
 
-@objc protocol CreateIceCreamRoutingLogic {
-    //func routeToSomewhere(segue: UIStoryboardSegue?)
+protocol CreateIceCreamRoutingLogic {
+    var navigationController: UINavigationController? { get }
+    
+    var routeToIngredientListRelay: PublishRelay<Void> { get }
+    
+    func routeToIngredientList(with data: [String])
 }
 
 protocol CreateIceCreamDataPassing {
@@ -18,34 +25,53 @@ protocol CreateIceCreamDataPassing {
 
 class CreateIceCreamRouter: NSObject, CreateIceCreamRoutingLogic, CreateIceCreamDataPassing {
     
+    var navigationController: UINavigationController?
+    
+    var routeToIngredientListRelay: PublishRelay<Void> = .init()
+    
     weak var viewController: CreateIceCreamViewController?
     var dataStore: CreateIceCreamDataStore?
     
-    // MARK: Routing
+    // TODO: 화면전환 구현 필요!!
+    func bind(to viewController: CreateIceCreamViewController) -> Disposable {
+        let routeToIngredientListDispoable = routeToIngredientListRelay
+            .subscribe(onNext: { [weak self, weak viewController] in
+                guard let `self` = self else { return }
+                //guard let names = self.
+                
+                let vc = IngredientListViewController()
+                //vc.router?.dataStore?.name =
+                viewController?.present(vc, animated: true, completion: nil)
+            })
+        
+        return Disposables.create([routeToIngredientListDispoable])
+    }
     
-//    func routeToSomewhere(segue: UIStoryboardSegue?) {
-//        if let segue = segue {
-//            let destinationVC = segue.destination as! SomewhereViewController
-//            var destinationDS = destinationVC.router!.dataStore!
-//            passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//        } else {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-//            var destinationDS = destinationVC.router!.dataStore!
-//            passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-//            navigateToSomewhere(source: viewController!, destination: destinationVC)
-//        }
-//    }
+    func routeToIngredientList(with data: [String]) {
+        let viewController = IngredientListViewController(data: data)
+        
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
     
     // MARK: Navigation
     
-//    func navigateToSomewhere(source: CreateIceCreamViewController, destination: SomewhereViewController) {
-//        source.show(destination, sender: nil)
-//    }
+    func navigateToIngredientList(source: CreateIceCreamViewController, destination: IngredientListViewController) {
+        source.show(destination, sender: nil)
+    }
     
     // MARK: Passing data
     
-//    func passDataToSomewhere(source: CreateIceCreamDataStore, destination: inout SomewhereDataStore) {
-//        destination.name = source.name
-//    }
+    func passDataToIngredientList(source: CreateIceCreamDataStore, destination: inout IngredientListDataStore) {
+        guard let selectedRow = viewController?.tableView.indexPathForSelectedRow?.row else { print("selectedRow is Nil"); return }
+        
+        if selectedRow == 0 {
+            destination.name = source.iceCream?.cones ?? []
+        } else if selectedRow == 1 {
+            destination.name = source.iceCream?.flavors ?? []
+        } else if selectedRow == 2 {
+            destination.name = source.iceCream?.toppings ?? []
+        }
+           
+    }
 }

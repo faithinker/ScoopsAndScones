@@ -18,9 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let rootVC = UINavigationController(rootViewController: CreateIceCreamViewController())
+        let viewController = CreateIceCreamViewController()
         
-        window?.rootViewController = rootVC
+        let navigationController = UINavigationController(rootViewController: viewController)
+        
+        CreateIceCreamConfigurator.configureModule(viewController: viewController)
+        
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 

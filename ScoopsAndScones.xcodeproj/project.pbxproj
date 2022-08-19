@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05AAB79228AB7C83001C15C6 /* IngredientListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAB78C28AB7C83001C15C6 /* IngredientListPresenter.swift */; };
+		05AAB79328AB7C83001C15C6 /* IngredientListWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAB78D28AB7C83001C15C6 /* IngredientListWorker.swift */; };
+		05AAB79428AB7C83001C15C6 /* IngredientListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAB78E28AB7C83001C15C6 /* IngredientListRouter.swift */; };
+		05AAB79528AB7C83001C15C6 /* IngredientListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAB78F28AB7C83001C15C6 /* IngredientListModels.swift */; };
+		05AAB79628AB7C83001C15C6 /* IngredientListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAB79028AB7C83001C15C6 /* IngredientListViewController.swift */; };
+		05AAB79728AB7C83001C15C6 /* IngredientListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAB79128AB7C83001C15C6 /* IngredientListInteractor.swift */; };
+		05E69B0F28ACAE0D00C17A42 /* CreateIceCreamConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E69B0E28ACAE0D00C17A42 /* CreateIceCreamConfigurator.swift */; };
 		05FCC81F28A18893002DA706 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FCC81E28A18893002DA706 /* AppDelegate.swift */; };
 		05FCC82128A18893002DA706 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FCC82028A18893002DA706 /* SceneDelegate.swift */; };
 		05FCC82828A18895002DA706 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05FCC82728A18895002DA706 /* Assets.xcassets */; };
@@ -53,6 +60,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05AAB78C28AB7C83001C15C6 /* IngredientListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListPresenter.swift; sourceTree = "<group>"; };
+		05AAB78D28AB7C83001C15C6 /* IngredientListWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListWorker.swift; sourceTree = "<group>"; };
+		05AAB78E28AB7C83001C15C6 /* IngredientListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListRouter.swift; sourceTree = "<group>"; };
+		05AAB78F28AB7C83001C15C6 /* IngredientListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListModels.swift; sourceTree = "<group>"; };
+		05AAB79028AB7C83001C15C6 /* IngredientListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListViewController.swift; sourceTree = "<group>"; };
+		05AAB79128AB7C83001C15C6 /* IngredientListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientListInteractor.swift; sourceTree = "<group>"; };
+		05E69B0E28ACAE0D00C17A42 /* CreateIceCreamConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIceCreamConfigurator.swift; sourceTree = "<group>"; };
 		05FCC81B28A18893002DA706 /* ScoopsAndScones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoopsAndScones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05FCC81E28A18893002DA706 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05FCC82028A18893002DA706 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +124,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05AAB78928AB7BBA001C15C6 /* IngredientList */ = {
+			isa = PBXGroup;
+			children = (
+				05AAB78C28AB7C83001C15C6 /* IngredientListPresenter.swift */,
+				05AAB78D28AB7C83001C15C6 /* IngredientListWorker.swift */,
+				05AAB78E28AB7C83001C15C6 /* IngredientListRouter.swift */,
+				05AAB78F28AB7C83001C15C6 /* IngredientListModels.swift */,
+				05AAB79028AB7C83001C15C6 /* IngredientListViewController.swift */,
+				05AAB79128AB7C83001C15C6 /* IngredientListInteractor.swift */,
+			);
+			path = IngredientList;
+			sourceTree = "<group>";
+		};
 		05FCC81228A18893002DA706 = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +226,7 @@
 		05FCC85A28A18E0C002DA706 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				05AAB78928AB7BBA001C15C6 /* IngredientList */,
 				05FCC87628A1A140002DA706 /* Component */,
 				05FCC86528A1923B002DA706 /* CreateIceCream */,
 			);
@@ -234,12 +262,13 @@
 		05FCC86528A1923B002DA706 /* CreateIceCream */ = {
 			isa = PBXGroup;
 			children = (
+				05FCC86C28A197F1002DA706 /* CreateIceCreamViewController.swift */,
+				05FCC86D28A197F1002DA706 /* CreateIceCreamInteractor.swift */,
 				05FCC86828A197F1002DA706 /* CreateIceCreamPresenter.swift */,
 				05FCC86928A197F1002DA706 /* CreateIceCreamWorker.swift */,
 				05FCC86A28A197F1002DA706 /* CreateIceCreamRouter.swift */,
 				05FCC86B28A197F1002DA706 /* CreateIceCreamModels.swift */,
-				05FCC86C28A197F1002DA706 /* CreateIceCreamViewController.swift */,
-				05FCC86D28A197F1002DA706 /* CreateIceCreamInteractor.swift */,
+				05E69B0E28ACAE0D00C17A42 /* CreateIceCreamConfigurator.swift */,
 			);
 			path = CreateIceCream;
 			sourceTree = "<group>";
@@ -398,19 +427,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05AAB79328AB7C83001C15C6 /* IngredientListWorker.swift in Sources */,
+				05AAB79628AB7C83001C15C6 /* IngredientListViewController.swift in Sources */,
 				05FCC87328A197F1002DA706 /* CreateIceCreamInteractor.swift in Sources */,
 				05FCC86328A190FB002DA706 /* IceCreamDataStore.swift in Sources */,
+				05AAB79528AB7C83001C15C6 /* IngredientListModels.swift in Sources */,
 				05FCC86F28A197F1002DA706 /* CreateIceCreamWorker.swift in Sources */,
 				05FCC86728A1979E002DA706 /* Bundle+.swift in Sources */,
 				05FCC87828A1A153002DA706 /* IceCreamCell.swift in Sources */,
 				05FCC87128A197F1002DA706 /* CreateIceCreamModels.swift in Sources */,
 				05FCC85928A18C31002DA706 /* UIView+.swift in Sources */,
+				05E69B0F28ACAE0D00C17A42 /* CreateIceCreamConfigurator.swift in Sources */,
 				05FCC87228A197F1002DA706 /* CreateIceCreamViewController.swift in Sources */,
+				05AAB79728AB7C83001C15C6 /* IngredientListInteractor.swift in Sources */,
 				05FCC86128A190DD002DA706 /* IceCream.swift in Sources */,
 				05FCC86E28A197F1002DA706 /* CreateIceCreamPresenter.swift in Sources */,
+				05AAB79428AB7C83001C15C6 /* IngredientListRouter.swift in Sources */,
 				05FCC81F28A18893002DA706 /* AppDelegate.swift in Sources */,
 				05FCC82128A18893002DA706 /* SceneDelegate.swift in Sources */,
 				05FCC87028A197F1002DA706 /* CreateIceCreamRouter.swift in Sources */,
+				05AAB79228AB7C83001C15C6 /* IngredientListPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

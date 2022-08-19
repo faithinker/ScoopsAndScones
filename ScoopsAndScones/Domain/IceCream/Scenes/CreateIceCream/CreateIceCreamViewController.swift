@@ -15,6 +15,8 @@ import NSObject_Rx
 
 protocol CreateIceCreamDisplayLogic: class {
     func displayIceCream(viewModel: CreateIceCream.LoadIceCream.ViewModel)
+    
+    func displayIngredientList(with data: [String])
 }
 
 class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic {
@@ -33,7 +35,7 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         $0.textColor = .systemGray
     }
     
-    private lazy var tableView = UITableView().then {
+    public lazy var tableView = UITableView().then {
         $0.layer.cornerRadius = 15
         $0.layer.backgroundColor = UIColor.cyan.cgColor
         $0.rowHeight = 50 //UITableView.automaticDimension
@@ -46,7 +48,8 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         $0.isEnabled = false
         $0.layer.cornerRadius = 8
         $0.setTitle("DONE", for: .normal)
-        $0.setTitleColor(.secondaryLabel, for: .normal)
+        $0.setTitleColor(.secondaryLabel, for: .disabled)
+        $0.setTitleColor(.systemBlue, for: .disabled)
         $0.backgroundColor = .white
     }
     
@@ -62,27 +65,10 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-      setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
-    }
-    
-    // MARK: Setup
-    
-    private func setup() {
-        let viewController = self
-        let interactor = CreateIceCreamInteractor()
-        let presenter = CreateIceCreamPresenter()
-        let router = CreateIceCreamRouter()
-        viewController.interactor = interactor
-        viewController.router = router
-        interactor.presenter = presenter
-        presenter.viewController = viewController
-        router.viewController = viewController
-        router.dataStore = interactor
     }
     
     // MARK: Routing
@@ -106,10 +92,6 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         fetchIceCream()
     }
     
-    // MARK: Do something
-    
-    //lazy var nameLabel = UILabel()
-    
     // MARK: #1 Load Data
     func fetchIceCream() {
         let request = CreateIceCream.LoadIceCream.Request()
@@ -121,6 +103,10 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         iceCream.displayedCones = viewModel.cones
         iceCream.displayedFlavors = viewModel.flavors
         iceCream.displayedToppings = viewModel.toppings
+    }
+    
+    func displayIngredientList(with data: [String]) {
+        self.router?.routeToIngredientList(with: data)
     }
     
     private func setupNavigation() {
@@ -167,6 +153,10 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
                 cell.configure(element)
             }.disposed(by: rx.disposeBag)
         
-        
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] index in
+                guard let `self` = self else { return }
+                self.interactor?.didSelectRow(at: index.row)
+            }).disposed(by: rx.disposeBag)
     }
 }

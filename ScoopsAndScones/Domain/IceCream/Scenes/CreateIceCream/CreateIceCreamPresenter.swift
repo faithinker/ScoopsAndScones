@@ -10,6 +10,8 @@ import UIKit
 
 protocol CreateIceCreamPresentationLogic {
     func presentIceCream(response: CreateIceCream.LoadIceCream.Response)
+    
+    func presentIngrdientList(passingData: [String])
 }
 
 class CreateIceCreamPresenter: CreateIceCreamPresentationLogic {
@@ -20,5 +22,10 @@ class CreateIceCreamPresenter: CreateIceCreamPresentationLogic {
     func presentIceCream(response: CreateIceCream.LoadIceCream.Response) {
         let viewModel = CreateIceCream.LoadIceCream.ViewModel(cones: response.iceCreamData.cones, flavors: response.iceCreamData.flavors, toppings: response.iceCreamData.toppings)
         viewController?.displayIceCream(viewModel: viewModel)
+    }
+    
+    // MARK: Presenter -> ViewController
+    func presentIngrdientList(passingData: [String]) {
+        viewController?.displayIngredientList(with: passingData)
     }
 }

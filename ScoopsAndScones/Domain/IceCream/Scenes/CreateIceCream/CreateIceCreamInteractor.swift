@@ -10,17 +10,23 @@ import UIKit
 
 protocol CreateIceCreamBusinessLogic {
     func loadIceCream(request: CreateIceCream.LoadIceCream.Request)
+    
+    func didSelectRow(at index: Int)
 }
 
 protocol CreateIceCreamDataStore {
-    //var name: String { get set }
+    var iceCream: IceCream? { get set }
 }
 
 class CreateIceCreamInteractor: CreateIceCreamBusinessLogic, CreateIceCreamDataStore {
     
+    var iceCream: IceCream?
+    
+    
     var presenter: CreateIceCreamPresentationLogic?
     var worker: CreateIceCreamWorker?
-    //var name: String = ""
+    
+    private var names: [String] = []
     
     // MARK: #2 Communicate NetworkWorker
     func loadIceCream(request: CreateIceCream.LoadIceCream.Request) {
@@ -28,7 +34,20 @@ class CreateIceCreamInteractor: CreateIceCreamBusinessLogic, CreateIceCreamDataS
         worker?.doSomeWork()
         
         let iceCream = Bundle.main.decode(IceCream.self, from: "icecream.json")
+        self.iceCream = iceCream
         let response = CreateIceCream.LoadIceCream.Response(iceCreamData: iceCream)
         presenter?.presentIceCream(response: response)
+    }
+    
+    func didSelectRow(at index: Int) {
+        if index == 0 {
+            names = iceCream?.cones ?? []
+        } else if index == 1 {
+            names = iceCream?.flavors ?? []
+        } else if index == 2 {
+            names = iceCream?.toppings ?? []
+        }
+        
+        presenter?.presentIngrdientList(passingData: names)
     }
 }
