@@ -21,6 +21,8 @@ protocol CreateIceCreamDisplayLogic: class {
 
 class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic {
     
+    var selectedItems = Array(repeating: "", count: 3)
+    
     var interactor: CreateIceCreamBusinessLogic?
     var router: (NSObjectProtocol & CreateIceCreamRoutingLogic & CreateIceCreamDataPassing)?
     
@@ -45,11 +47,11 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
     }
     
     private lazy var doneButton = UIButton().then {
-        $0.isEnabled = false
         $0.layer.cornerRadius = 8
         $0.setTitle("DONE", for: .normal)
+        $0.setTitle("DONE", for: .disabled)
         $0.setTitleColor(.secondaryLabel, for: .disabled)
-        $0.setTitleColor(.systemBlue, for: .disabled)
+        $0.setTitleColor(.systemBlue, for: .normal)
         $0.backgroundColor = .white
     }
     
@@ -151,6 +153,7 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
             .bind(to: tableView.rx.items(cellIdentifier: IceCreamCell.identifier, cellType: IceCreamCell.self)) { [weak self] row, element, cell in
                 guard let `self` = self else { return }
                 cell.configure(element)
+                cell.selectedIngredient = self.selectedItems[row]
             }.disposed(by: rx.disposeBag)
         
         tableView.rx.itemSelected
@@ -158,5 +161,18 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
                 guard let `self` = self else { return }
                 self.interactor?.didSelectRow(at: index.row)
             }).disposed(by: rx.disposeBag)
+        
+        doneButton.isEnabled = !doneButtonDisabled()
+    }
+    
+    
+    // 재료가 모두 선택되었다면 reset할 수 있도록 Done버튼 disabled : false 처리함
+    private func doneButtonDisabled() -> Bool {
+        
+        let bool = selectedItems.contains(where: { data in
+            return data.isEmpty
+        })
+        
+        return bool
     }
 }

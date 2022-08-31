@@ -124,6 +124,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		058D2D9828BF266100B23C46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		05AAB78928AB7BBA001C15C6 /* IngredientList */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +168,7 @@
 		05FCC81D28A18893002DA706 /* ScoopsAndScones */ = {
 			isa = PBXGroup;
 			children = (
+				058D2D9828BF266100B23C46 /* Models */,
 				05FCC85528A18BE5002DA706 /* Foundation */,
 				05FCC84E28A18953002DA706 /* Supporting Files */,
 				05FCC85D28A1907D002DA706 /* Domain */,

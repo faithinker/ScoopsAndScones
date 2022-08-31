@@ -1,6 +1,6 @@
 #  Clean Swift - VIP
 
-## VIP - CodeUI - Combine - UIKit
+## VIP - CodeUI - UIKit - RxSwift  
 
 raywenderlich에 SwiftUI로 만들어진 IceCream 프로젝트를 UIKit으로 변형하여 현재 내가 쓰는 프로젝트에 맞게 변형시켰다.
 
@@ -31,3 +31,5 @@ https://jhtop0419.tistory.com/23
 - Github Exmaple Project
 https://github.com/GeekTree0101/RxCleanSwift
 https://github.com/bhardwajpankaj/VIP
+https://github.com/yokurin/RxSwift-VIPER-iOS
+

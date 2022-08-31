@@ -8,8 +8,11 @@
 
 import UIKit
 
+/// 함수이름에 present접두어
 protocol IngredientListPresentationLogic {
     func presentIngredient(response: IngredientList.Something.Response)
+    
+    func presentIngredient(data: String)
 }
 
 class IngredientListPresenter: IngredientListPresentationLogic {
@@ -30,5 +33,9 @@ class IngredientListPresenter: IngredientListPresentationLogic {
         
         let viewModel = IngredientList.Something.ViewModel(displayedList: displayedList)
         viewController?.displayFetchedNames(viewModel: viewModel)
+    }
+    
+    func presentIngredient(data: String) {
+        viewController?.displayPresentToHome(didObtainName: data)
     }
 }

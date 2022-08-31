@@ -15,6 +15,13 @@ import NSObject_Rx
 class IceCreamCell: UITableViewCell {
     static let identifier = String(describing: IceCreamCell.self)
     
+    var selectedIngredient: String {
+        get { return "" }
+        set {
+            selectedItem.text = newValue
+        }
+    }
+    
     private lazy var titleLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 17)
         $0.text = "Select Cone"

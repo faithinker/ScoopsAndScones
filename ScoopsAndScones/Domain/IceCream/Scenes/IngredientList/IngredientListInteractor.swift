@@ -10,6 +10,8 @@ import UIKit
 
 protocol IngredientListBusinessLogic {
     func getList(request: IngredientList.Something.Request)
+    
+    func didSelectRow(at index: Int)
 }
 
 protocol IngredientListDataStore {
@@ -20,7 +22,7 @@ class IngredientListInteractor: IngredientListBusinessLogic, IngredientListDataS
     
     var presenter: IngredientListPresentationLogic?
     var worker: IngredientListWorker?
-    var name: [String]!
+    var name: [String]! // VC에 있는 리스트 값을 갖고와야함
     
     // MARK: Do something
     
@@ -31,4 +33,12 @@ class IngredientListInteractor: IngredientListBusinessLogic, IngredientListDataS
         let response = IngredientList.Something.Response(name: name)
         presenter?.presentIngredient(response: response)
     }
+    
+    // MARK: Input
+    func didSelectRow(at index: Int) {
+        presenter?.presentIngredient(data: name[index])
+        
+    }
+    
+    // MARK: Output
 }

@@ -10,14 +10,14 @@ import UIKit
 
 protocol IngredientListDisplayLogic: class {
     func displayFetchedNames(viewModel: IngredientList.Something.ViewModel)
+    
+    func displayPresentToHome(didObtainName: String)
 }
 
 class IngredientListViewController: UITableViewController, IngredientListDisplayLogic {
     
     typealias Name = IngredientList.Something.ViewModel.DisplayedName
-    
-    //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-    
+
     
     var displayedNames: [Name] = []
     
@@ -77,6 +77,10 @@ class IngredientListViewController: UITableViewController, IngredientListDisplay
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        interactor?.didSelectRow(at: indexPath.row)
+    }
+    
     func setupLayout() {
         view.backgroundColor = .systemGray6
     }
@@ -126,5 +130,9 @@ class IngredientListViewController: UITableViewController, IngredientListDisplay
     func displayFetchedNames(viewModel: IngredientList.Something.ViewModel) {
         displayedNames = viewModel.displayedList
         tableView.reloadData()
+    }
+    
+    func displayPresentToHome(didObtainName: String) {
+        router?.routeToHome(with: didObtainName)
     }
 }

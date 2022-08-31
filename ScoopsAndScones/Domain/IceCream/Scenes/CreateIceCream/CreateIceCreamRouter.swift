@@ -20,7 +20,7 @@ protocol CreateIceCreamRoutingLogic {
 }
 
 protocol CreateIceCreamDataPassing {
-    var dataStore: CreateIceCreamDataStore? { get }
+    var dataStore: CreateIceCreamDataStore? { get set }
 }
 
 class CreateIceCreamRouter: NSObject, CreateIceCreamRoutingLogic, CreateIceCreamDataPassing {
@@ -40,6 +40,7 @@ class CreateIceCreamRouter: NSObject, CreateIceCreamRoutingLogic, CreateIceCream
                 //guard let names = self.
                 
                 let vc = IngredientListViewController()
+                //vc.router?.dataStore
                 //vc.router?.dataStore?.name =
                 viewController?.present(vc, animated: true, completion: nil)
             })
@@ -48,9 +49,10 @@ class CreateIceCreamRouter: NSObject, CreateIceCreamRoutingLogic, CreateIceCream
     }
     
     func routeToIngredientList(with data: [String]) {
-        let viewController = IngredientListViewController(data: data)
-        
-        navigationController?.pushViewController(viewController, animated: true)
+        let ingredientViewController = IngredientListViewController(data: data)
+        ingredientViewController.router?.dataStore?.name = data
+        ingredientViewController.router?.navigationController = navigationController
+        navigationController?.pushViewController(ingredientViewController, animated: true)
     }
     
     
