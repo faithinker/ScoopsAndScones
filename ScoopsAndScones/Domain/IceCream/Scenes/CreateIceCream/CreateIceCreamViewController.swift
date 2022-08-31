@@ -16,18 +16,19 @@ import NSObject_Rx
 protocol CreateIceCreamDisplayLogic: class {
     func displayIceCream(viewModel: CreateIceCream.LoadIceCream.ViewModel)
     
-    func displayIngredientList(with data: [String])
+    func displayIngredientList(with data: [String], index: Int)
 }
 
 class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic {
     
-    var selectedItems = Array(repeating: "", count: 3)
+    //var selectedItems = Array(repeating: "", count: 3)
+    
+    let selectedItems = BehaviorRelay<[String]>(value: Array(repeating: "", count: 3))
     
     var interactor: CreateIceCreamBusinessLogic?
     var router: (NSObjectProtocol & CreateIceCreamRoutingLogic & CreateIceCreamDataPassing)?
     
     var iceCream = IceCreamDataStore()
-    
     
     // MARK: View
     
@@ -73,17 +74,6 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         super.init(coder: aDecoder)
     }
     
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
@@ -107,8 +97,8 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         iceCream.displayedToppings = viewModel.toppings
     }
     
-    func displayIngredientList(with data: [String]) {
-        self.router?.routeToIngredientList(with: data)
+    func displayIngredientList(with data: [String], index: Int) {
+        self.router?.routeToIngredientList(with: data, index: index)
     }
     
     private func setupNavigation() {
@@ -153,7 +143,7 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
             .bind(to: tableView.rx.items(cellIdentifier: IceCreamCell.identifier, cellType: IceCreamCell.self)) { [weak self] row, element, cell in
                 guard let `self` = self else { return }
                 cell.configure(element)
-                cell.selectedIngredient = self.selectedItems[row]
+                cell.selectedIngredient = self.selectedItems.value[row]
             }.disposed(by: rx.disposeBag)
         
         tableView.rx.itemSelected
@@ -163,13 +153,22 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
             }).disposed(by: rx.disposeBag)
         
         doneButton.isEnabled = !doneButtonDisabled()
+        
+        
+        selectedItems.subscribe(onNext: { [weak self] in
+            guard let `self` = self else { return }
+            for i in 0..<$0.count {
+                let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as? IceCreamCell
+                cell?.selectedIngredient = $0[i]
+            }
+        }).disposed(by: rx.disposeBag)
     }
     
     
     // 재료가 모두 선택되었다면 reset할 수 있도록 Done버튼 disabled : false 처리함
     private func doneButtonDisabled() -> Bool {
         
-        let bool = selectedItems.contains(where: { data in
+        let bool = selectedItems.value.contains(where: { data in
             return data.isEmpty
         })
         

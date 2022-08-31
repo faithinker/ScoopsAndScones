@@ -11,7 +11,7 @@ import UIKit
 @objc protocol IngredientListRoutingLogic {
     var navigationController: UINavigationController? { get set }
     
-    func routeToHome(with ingredient: String)
+    func routeToHome(with ingredient: String, index: Int)
 }
 
 protocol IngredientListDataPassing {
@@ -26,14 +26,17 @@ class IngredientListRouter: NSObject, IngredientListRoutingLogic, IngredientList
     var dataStore: IngredientListDataStore?
     
     // MARK: Routing
-    func routeToHome(with ingredient: String) {
-        //guard let createIceCreamVC = navigationController?.viewControllers.first(where: { $0 is CreateIceCreamViewController }) else { print("Error"); return }
+    func routeToHome(with ingredient: String, index: Int) {
         
-//        let createIceCreamVC = navigationController?.viewControllers.first as! CreateIceCreamViewController
-//
-//        createIceCreamVC.selectedItems[0] = ingredient
+        guard let createIceCreamVC = navigationController?.viewControllers.first as? CreateIceCreamViewController else { print("As Transfrom Fail"); return }
+        
+        
+        var tempValue = createIceCreamVC.selectedItems.value
+        tempValue[index] = ingredient
+        
+        createIceCreamVC.selectedItems.accept(tempValue)
+        
         
         navigationController?.popViewController(animated: true)
-        //viewController?.dismiss(animated: true)
     }
 }

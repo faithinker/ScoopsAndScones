@@ -16,7 +16,7 @@ protocol CreateIceCreamRoutingLogic {
     
     var routeToIngredientListRelay: PublishRelay<Void> { get }
     
-    func routeToIngredientList(with data: [String])
+    func routeToIngredientList(with data: [String], index: Int)
 }
 
 protocol CreateIceCreamDataPassing {
@@ -32,27 +32,12 @@ class CreateIceCreamRouter: NSObject, CreateIceCreamRoutingLogic, CreateIceCream
     weak var viewController: CreateIceCreamViewController?
     var dataStore: CreateIceCreamDataStore?
     
-    // TODO: 화면전환 구현 필요!!
-    func bind(to viewController: CreateIceCreamViewController) -> Disposable {
-        let routeToIngredientListDispoable = routeToIngredientListRelay
-            .subscribe(onNext: { [weak self, weak viewController] in
-                guard let `self` = self else { return }
-                //guard let names = self.
-                
-                let vc = IngredientListViewController()
-                //vc.router?.dataStore
-                //vc.router?.dataStore?.name =
-                viewController?.present(vc, animated: true, completion: nil)
-            })
-        
-        return Disposables.create([routeToIngredientListDispoable])
-    }
-    
-    func routeToIngredientList(with data: [String]) {
-        let ingredientViewController = IngredientListViewController(data: data)
-        ingredientViewController.router?.dataStore?.name = data
-        ingredientViewController.router?.navigationController = navigationController
-        navigationController?.pushViewController(ingredientViewController, animated: true)
+    func routeToIngredientList(with data: [String], index: Int) {
+        let viewController = IngredientListViewController(data: data)
+        viewController.router?.dataStore?.name = data
+        viewController.router?.dataStore?.iceCreamIndex = index
+        viewController.router?.navigationController = navigationController
+        navigationController?.pushViewController(viewController, animated: true)
     }
     
     

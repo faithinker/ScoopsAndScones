@@ -22,7 +22,6 @@ class CreateIceCreamInteractor: CreateIceCreamBusinessLogic, CreateIceCreamDataS
     
     var iceCream: IceCream?
     
-    
     var presenter: CreateIceCreamPresentationLogic?
     var worker: CreateIceCreamWorker?
     
@@ -48,6 +47,6 @@ class CreateIceCreamInteractor: CreateIceCreamBusinessLogic, CreateIceCreamDataS
             names = iceCream?.toppings ?? []
         }
         
-        presenter?.presentIngrdientList(passingData: names)
+        presenter?.presentIngrdientList(passingData: names, passingIndex: index)
     }
 }

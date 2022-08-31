@@ -9,14 +9,14 @@
 import UIKit
 
 protocol IngredientListDisplayLogic: class {
-    func displayFetchedNames(viewModel: IngredientList.Something.ViewModel)
+    func displayFetchedNames(viewModel: IngredientList.Menu.ViewModel)
     
-    func displayPresentToHome(didObtainName: String)
+    func displayPresentToHome(didObtainName: String, index: Int)
 }
 
 class IngredientListViewController: UITableViewController, IngredientListDisplayLogic {
     
-    typealias Name = IngredientList.Something.ViewModel.DisplayedName
+    typealias Name = IngredientList.Menu.ViewModel.DisplayedName
 
     
     var displayedNames: [Name] = []
@@ -123,16 +123,16 @@ class IngredientListViewController: UITableViewController, IngredientListDisplay
     lazy var nameLabel = UILabel()
     
     func doSomething() {
-        let request = IngredientList.Something.Request()
+        let request = IngredientList.Menu.Request()
         interactor?.getList(request: request)
     }
     
-    func displayFetchedNames(viewModel: IngredientList.Something.ViewModel) {
+    func displayFetchedNames(viewModel: IngredientList.Menu.ViewModel) {
         displayedNames = viewModel.displayedList
         tableView.reloadData()
     }
     
-    func displayPresentToHome(didObtainName: String) {
-        router?.routeToHome(with: didObtainName)
+    func displayPresentToHome(didObtainName: String, index: Int) {
+        router?.routeToHome(with: didObtainName, index: index)
     }
 }

@@ -46,6 +46,8 @@ class IceCreamCell: UITableViewCell {
     }
     
     private func setupLayout() {
+        selectionStyle = .none
+        
         contentView.addSubviews([titleLabel, selectedItem, detailButton])
         titleLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(10)

@@ -235,7 +235,6 @@
 			isa = PBXGroup;
 			children = (
 				05AAB78928AB7BBA001C15C6 /* IngredientList */,
-				05FCC87628A1A140002DA706 /* Component */,
 				05FCC86528A1923B002DA706 /* CreateIceCream */,
 			);
 			path = Scenes;
@@ -270,6 +269,7 @@
 		05FCC86528A1923B002DA706 /* CreateIceCream */ = {
 			isa = PBXGroup;
 			children = (
+				05FCC87628A1A140002DA706 /* Component */,
 				05FCC86C28A197F1002DA706 /* CreateIceCreamViewController.swift */,
 				05FCC86D28A197F1002DA706 /* CreateIceCreamInteractor.swift */,
 				05FCC86828A197F1002DA706 /* CreateIceCreamPresenter.swift */,

@@ -11,7 +11,7 @@ import UIKit
 enum IngredientList {
     // MARK: Use cases
     
-    enum Something {
+    enum Menu {
         struct Request {
         }
         struct Response {

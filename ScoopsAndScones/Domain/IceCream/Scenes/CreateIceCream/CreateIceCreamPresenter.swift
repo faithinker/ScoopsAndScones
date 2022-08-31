@@ -11,7 +11,7 @@ import UIKit
 protocol CreateIceCreamPresentationLogic {
     func presentIceCream(response: CreateIceCream.LoadIceCream.Response)
     
-    func presentIngrdientList(passingData: [String])
+    func presentIngrdientList(passingData: [String], passingIndex: Int)
 }
 
 class CreateIceCreamPresenter: CreateIceCreamPresentationLogic {
@@ -25,7 +25,7 @@ class CreateIceCreamPresenter: CreateIceCreamPresentationLogic {
     }
     
     // MARK: Presenter -> ViewController
-    func presentIngrdientList(passingData: [String]) {
-        viewController?.displayIngredientList(with: passingData)
+    func presentIngrdientList(passingData: [String], passingIndex: Int) {
+        viewController?.displayIngredientList(with: passingData, index: passingIndex)
     }
 }
