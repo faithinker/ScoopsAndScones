@@ -74,8 +74,6 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         super.init(coder: aDecoder)
     }
     
-    // MARK: View lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigation()
@@ -157,14 +155,19 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
                 self.interactor?.didSelectRow(at: index.row)
             }).disposed(by: rx.disposeBag)
         
-        //doneButton.isEnabled = !doneButtonDisabled()
-        
+        /// 여기서 로직 처리하는게 틀린것 같다...
+        /// Interactor에서 Input이 올바른지 로직처리를 하고 그다음에 Presenter에서 View에 맞게 변형시킨뒤,
+        /// View에서는 단순하게 표현만하는게 맞지 않나...?
         selectedItems.subscribe(onNext: { [weak self] values in
             guard let `self` = self else { return }
             
             let bool = values.filter { $0 != "" }.isEmpty
             
             self.updateView(bool)
+            
+            let allSelected = values.filter { $0 == "" }.isEmpty
+            
+            self.doneButton.isEnabled = allSelected
             
             for i in 0..<values.count {
                 let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as? IceCreamCell
@@ -177,9 +180,24 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
                 } else if i == 2 {
                     self.iceCreamImageView.selectedTopping = values[i]
                 }
-                
             }
         }).disposed(by: rx.disposeBag)
+        
+        doneButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else { return }
+                self.alertShow()
+            }).disposed(by: rx.disposeBag)
+    }
+    
+    private func alertShow() {
+        let alert = UIAlertController(title: "Your ice cream is ready!", message: "Let's make a new one. You can never have too much ice cream...", preferredStyle: UIAlertController.Style.alert)
+        let cancelAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { [weak self] _ in
+            guard let `self` = self else { return }
+            self.selectedItems.accept(Array(repeating: "", count: 3))
+        })
+        alert.addAction(cancelAction)
+        self.present(alert, animated: false)
     }
     
     // 재료가 선택될 시 UI Update
@@ -188,16 +206,5 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         self.resultView.snp.updateConstraints {
             $0.height.equalTo(bool ? 50 : 250)
         }
-    }
-    
-    
-    // 재료가 모두 선택되었다면 reset할 수 있도록 Done버튼 disabled : false 처리함
-    private func doneButtonDisabled() -> Bool {
-        
-        let bool = selectedItems.value.contains(where: { data in
-            return data.isEmpty
-        })
-        
-        return bool
     }
 }

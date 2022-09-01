@@ -76,7 +76,7 @@ class IngredientListViewController: UITableViewController, IngredientListDisplay
         
         return cell
     }
-    
+    // $1
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         interactor?.didSelectRow(at: indexPath.row)
     }
