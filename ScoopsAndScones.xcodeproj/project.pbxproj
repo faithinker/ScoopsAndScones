@@ -40,6 +40,7 @@
 		05FCC87F28A1DC64002DA706 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 05FCC87E28A1DC64002DA706 /* RxRelay */; };
 		05FCC88128A1DC64002DA706 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 05FCC88028A1DC64002DA706 /* RxSwift */; };
 		05FCC88428A1DC7D002DA706 /* NSObject-Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 05FCC88328A1DC7D002DA706 /* NSObject-Rx */; };
+		05FEDD1B28BF5BD20074DEFA /* CreateIceCreamImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FEDD1A28BF5BD20074DEFA /* CreateIceCreamImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		05FCC86D28A197F1002DA706 /* CreateIceCreamInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIceCreamInteractor.swift; sourceTree = "<group>"; };
 		05FCC87428A199EE002DA706 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		05FCC87728A1A153002DA706 /* IceCreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCreamCell.swift; sourceTree = "<group>"; };
+		05FEDD1A28BF5BD20074DEFA /* CreateIceCreamImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIceCreamImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				05FCC87728A1A153002DA706 /* IceCreamCell.swift */,
+				05FEDD1A28BF5BD20074DEFA /* CreateIceCreamImageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				05FCC86328A190FB002DA706 /* IceCreamDataStore.swift in Sources */,
 				05AAB79528AB7C83001C15C6 /* IngredientListModels.swift in Sources */,
 				05FCC86F28A197F1002DA706 /* CreateIceCreamWorker.swift in Sources */,
+				05FEDD1B28BF5BD20074DEFA /* CreateIceCreamImageView.swift in Sources */,
 				05FCC86728A1979E002DA706 /* Bundle+.swift in Sources */,
 				05FCC87828A1A153002DA706 /* IceCreamCell.swift in Sources */,
 				05FCC87128A197F1002DA706 /* CreateIceCreamModels.swift in Sources */,

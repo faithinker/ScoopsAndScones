@@ -21,8 +21,6 @@ protocol CreateIceCreamDisplayLogic: class {
 
 class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic {
     
-    //var selectedItems = Array(repeating: "", count: 3)
-    
     let selectedItems = BehaviorRelay<[String]>(value: Array(repeating: "", count: 3))
     
     var interactor: CreateIceCreamBusinessLogic?
@@ -65,6 +63,8 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         $0.text = "Preparing..."
         $0.textAlignment = .center
     }
+    
+    let iceCreamImageView = CreateIceCreamImageView()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -131,10 +131,15 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
             $0.leading.trailing.equalToSuperview().inset(15)
         }
         
-        resultView.addSubview(preparingLabel)
+        resultView.addSubviews([preparingLabel, iceCreamImageView])
         preparingLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(15)
+        }
+        iceCreamImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(8)
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.height.equalTo(270)
         }
     }
     
@@ -152,16 +157,37 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
                 self.interactor?.didSelectRow(at: index.row)
             }).disposed(by: rx.disposeBag)
         
-        doneButton.isEnabled = !doneButtonDisabled()
+        //doneButton.isEnabled = !doneButtonDisabled()
         
-        
-        selectedItems.subscribe(onNext: { [weak self] in
+        selectedItems.subscribe(onNext: { [weak self] values in
             guard let `self` = self else { return }
-            for i in 0..<$0.count {
+            
+            let bool = values.filter { $0 != "" }.isEmpty
+            
+            self.updateView(bool)
+            
+            for i in 0..<values.count {
                 let cell = self.tableView.cellForRow(at: IndexPath(row: i, section: 0)) as? IceCreamCell
-                cell?.selectedIngredient = $0[i]
+                cell?.selectedIngredient = values[i]
+                
+                if i == 0 {
+                    self.iceCreamImageView.selectedCone = values[i]
+                } else if i == 1{
+                    self.iceCreamImageView.selectedFlavor = values[i]
+                } else if i == 2 {
+                    self.iceCreamImageView.selectedTopping = values[i]
+                }
+                
             }
         }).disposed(by: rx.disposeBag)
+    }
+    
+    // 재료가 선택될 시 UI Update
+    private func updateView(_ bool: Bool) {
+        self.preparingLabel.isHidden = !bool
+        self.resultView.snp.updateConstraints {
+            $0.height.equalTo(bool ? 50 : 250)
+        }
     }
     
     
