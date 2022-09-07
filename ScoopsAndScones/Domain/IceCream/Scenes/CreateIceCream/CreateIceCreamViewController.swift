@@ -64,7 +64,7 @@ class CreateIceCreamViewController: UIViewController, CreateIceCreamDisplayLogic
         $0.textAlignment = .center
     }
     
-    let iceCreamImageView = CreateIceCreamImageView()
+    private lazy var iceCreamImageView = CreateIceCreamImageView()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
       super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

@@ -14,8 +14,10 @@ import UIKit
     func routeToHome(with ingredient: String, index: Int)
 }
 
+/// 데이터의 경우 Router에서는 dataStore를 통해 접근하고
+/// Interactor에서는 DataStore프로토콜을 채택하여 접근한다.
 protocol IngredientListDataPassing {
-    var dataStore: IngredientListDataStore? { get set }
+    var dataStore: IngredientListDataStore? { get }
 }
 
 class IngredientListRouter: NSObject, IngredientListRoutingLogic, IngredientListDataPassing {
@@ -34,6 +36,7 @@ class IngredientListRouter: NSObject, IngredientListRoutingLogic, IngredientList
         var tempValue = createIceCreamVC.selectedItems.value
         tempValue[index] = ingredient
         
+        var dataStore = createIceCreamVC.router?.dataStore
         createIceCreamVC.selectedItems.accept(tempValue)
         
         

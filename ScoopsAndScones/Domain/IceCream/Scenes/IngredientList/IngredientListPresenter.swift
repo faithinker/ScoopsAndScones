@@ -10,7 +10,7 @@ import UIKit
 
 /// 함수이름에 present접두어
 protocol IngredientListPresentationLogic {
-    func presentIngredient(response: IngredientList.Menu.Response)
+    func presentIngredientList(response: IngredientList.Menu.Response)
     
     func presentIngredient(data: String, index: Int)
 }
@@ -21,17 +21,17 @@ class IngredientListPresenter: IngredientListPresentationLogic {
     
     // MARK: Do something
     
-    func presentIngredient(response: IngredientList.Menu.Response) {
+    func presentIngredientList(response: IngredientList.Menu.Response) {
         
-        typealias Name = IngredientList.Menu.ViewModel.DisplayedName
+        typealias VM = IngredientList.Menu.ViewModel
         
-        var displayedList: [IngredientList.Menu.ViewModel.DisplayedName] = []
+        var displayedList: [VM.DisplayedName] = []
         
         for i in 0..<response.name.count {
-            displayedList.append(Name(name: response.name[i]))
+            displayedList.append(VM.DisplayedName(name: response.name[i]))
         }
         
-        let viewModel = IngredientList.Menu.ViewModel(displayedList: displayedList)
+        let viewModel = VM(displayedList: displayedList)
         viewController?.displayFetchedNames(viewModel: viewModel)
     }
     

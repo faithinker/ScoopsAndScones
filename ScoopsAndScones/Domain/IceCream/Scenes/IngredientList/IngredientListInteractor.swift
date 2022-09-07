@@ -9,13 +9,15 @@
 import UIKit
 
 protocol IngredientListBusinessLogic {
+    func getList()
+    
     func getList(request: IngredientList.Menu.Request)
     
     func didSelectRow(at index: Int)
 }
 
 protocol IngredientListDataStore {
-    var name: [String]! { get set }
+    var name: [String]? { get set }
     
     var iceCreamIndex: Int! { get set }
 }
@@ -23,23 +25,24 @@ protocol IngredientListDataStore {
 class IngredientListInteractor: IngredientListBusinessLogic, IngredientListDataStore {
     
     var presenter: IngredientListPresentationLogic?
-    var worker: IngredientListWorker?
-    var name: [String]! // VC에 있는 리스트 값을 갖고와야함
+    var name: [String]?
     var iceCreamIndex: Int!
     
-    // MARK: Do something
+    func getList() {
+        let response = IngredientList.Menu.Response(name: name ?? [])
+        presenter?.presentIngredientList(response: response)
+    }
     
     func getList(request: IngredientList.Menu.Request) {
-        worker = IngredientListWorker()
-        worker?.doSomeWork()
-        
-        let response = IngredientList.Menu.Response(name: name)
-        presenter?.presentIngredient(response: response)
+        let response = IngredientList.Menu.Response(name: request.displayedName)
+        presenter?.presentIngredientList(response: response)
     }
     
     // MARK: Input
     func didSelectRow(at index: Int) {
-        presenter?.presentIngredient(data: name[index], index: iceCreamIndex)
+        if let nameList = name {
+            presenter?.presentIngredient(data: nameList[index], index: iceCreamIndex)
+        }
     }
     
     // MARK: Output

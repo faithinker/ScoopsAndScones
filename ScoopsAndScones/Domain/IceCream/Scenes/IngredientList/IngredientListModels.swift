@@ -13,6 +13,7 @@ enum IngredientList {
     
     enum Menu {
         struct Request {
+            var displayedName: [String]
         }
         struct Response {
             var name: [String]

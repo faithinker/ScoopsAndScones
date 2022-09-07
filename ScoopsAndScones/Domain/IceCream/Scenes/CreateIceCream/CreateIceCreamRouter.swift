@@ -33,11 +33,13 @@ class CreateIceCreamRouter: NSObject, CreateIceCreamRoutingLogic, CreateIceCream
     var dataStore: CreateIceCreamDataStore?
     
     func routeToIngredientList(with data: [String], index: Int) {
-        let viewController = IngredientListViewController(data: data)
-        viewController.router?.dataStore?.name = data
-        viewController.router?.dataStore?.iceCreamIndex = index
+        let viewController = IngredientListViewController()
+        var dataStore = viewController.router?.dataStore
+        dataStore?.name = data
+        dataStore?.iceCreamIndex = index
         viewController.router?.navigationController = navigationController
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.show(viewController, sender: nil)
+        //navigationController?.pushViewController(viewController, animated: true)
     }
     
     

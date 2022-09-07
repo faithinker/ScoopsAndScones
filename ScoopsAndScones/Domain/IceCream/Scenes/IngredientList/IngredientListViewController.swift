@@ -24,25 +24,8 @@ class IngredientListViewController: UITableViewController, IngredientListDisplay
     var interactor: IngredientListBusinessLogic?
     var router: (NSObjectProtocol & IngredientListRoutingLogic & IngredientListDataPassing)?
     
-    // MARK: Object lifecycle
-    init(data: [String]) {
-        for name in data {
-            displayedNames.append(Name(name: name))
-        }
-        super.init(style: .plain)
-        setup()
-        setupLayout()
-    }
-    
-    
     init() {
         super.init(style: .plain)
-        setup()
-        setupLayout()
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
         setupLayout()
     }
@@ -100,30 +83,26 @@ class IngredientListViewController: UITableViewController, IngredientListDisplay
         router.dataStore = interactor
     }
     
-    // MARK: Routing
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scene = segue.identifier {
-            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-            if let router = router, router.responds(to: selector) {
-                router.perform(selector, with: segue)
-            }
-        }
-    }
-    
     // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //doSomething()
     }
     
-    // MARK: Do something
+    // viewDidLoad에서 호출시 router의 데이터가 nil값으로 나온다. ViewLifeCycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getList()
+        // Response 객체를 따로 넘기는게 맞는가?
+        getListTest()
+    }
     
-    lazy var nameLabel = UILabel()
+    func getList() {
+        interactor?.getList()
+    }
     
-    func doSomething() {
-        let request = IngredientList.Menu.Request()
+    func getListTest() { //네이버 클린스위프트 ㅣ 16분 20초 map에서 따로 함수 호출해서 정리하는 방법도 있다.
+        let request = IngredientList.Menu.Request(displayedName: router?.dataStore?.name ?? [])
         interactor?.getList(request: request)
     }
     
