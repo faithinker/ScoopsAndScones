@@ -19,7 +19,7 @@ Pods/
 
 ## User settings
 ## 프로젝트 자체에 크게 영향을 주지 않는 개인 설정을 담은 디렉토리: breakpoint, 스냅샷 등
-xcuserdata/*
+*xcworkspace/xcuserdata/*
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
